@@ -1,0 +1,34 @@
+.grid{
+    display: grid;
+    grid-template-areas: "my-header my-header my-header" "my-nav my-section my-aside";
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: 200px 1fr 100px;
+}
+main{
+    color: white;
+    font-family: arial;
+    }
+    header{
+    background-color: blueviolet;
+    grid-area: my-header;
+    }
+    nav{
+    background-color: cornflowerblue;
+    grid-area: my-nav;
+    }
+    section{
+    background-color: indigo;
+    grid-area: my-section;
+    }
+    aside{
+    background-color: darkmagenta;
+    grid-area: my-aside;
+    }
+    footer{
+    background-color: darkorchid;
+    grid-area: my-aside;
+    }
+    nav,aside,section{
+        float:left;
+        height: 340px;
+    }
