@@ -1,0 +1,152 @@
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin-left: 25px;
+    
+    
+}
+aside ul li{
+    
+    color: white;
+    
+}
+aside ul li a{
+    text-decoration: none;
+    color:white;
+
+}
+footer ul {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+footer ul li {
+    text-decoration: none;
+    color:white;
+    font-size: 15px;
+    font-weight:lighter;
+
+}
+footer ul li a{
+    text-decoration: none;
+    color: white;    
+
+}
+nav ul li a{
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+    font-size: 20px;
+}
+#caja2{
+    background-color: blue;
+    width: 300px;
+    float: right;
+}
+
+#Nombre{
+    margin-top: 60px;
+
+}
+#Subtitulo{ 
+    font-size: 25px;
+    margin-top: 20px;
+
+}
+#Iniciar a{
+    text-decoration: none;
+    float:right;
+    color: bisque;
+    margin-top: -120px;
+    margin-right: 30px;
+    font-size: 25px;
+}
+
+
+
+.fotoa{
+    float: left;
+    width: 120px;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+.fotob{
+    float: left;
+    width: 100px;
+    margin-top: 30px;
+    margin-left: 40px;
+    
+}
+
+main {
+    display: grid;
+    color: white;
+    font-family: arial;
+
+    grid-template-areas: "my-header" "my-nav" "my-section" "my-aside""my-footer";
+    grid-template-columns: 100%;
+    grid-template-rows: 200px 150px 250px 100px 80px;
+}
+
+header {
+    background-color: rgb(8, 8, 105);
+    grid-area: my-header;
+}
+
+nav {
+    background-color: grey;
+    grid-area: my-nav;
+}
+
+section {
+    background-color: cadetblue;
+    grid-area: my-section;
+}
+
+aside {
+    background-color: rgb(184, 161, 30);
+    grid-area: my-aside;
+
+}
+
+footer {
+    background-color: rgb(8, 8, 105);
+    grid-area: my-footer;
+   
+}
+.foot{
+    display:inline-flex;
+
+}
+#imgp{
+    width: 300px;
+    height: 200px;
+}
+
+#ver{
+    text-decoration: none;
+}
+
+#p12{
+    display: flex;
+}
+#ver{
+    display: inline-block;
+}
+@media (min-width: 600px) and (max-width: 1000px) {
+    main {
+        grid-template-areas: "my-header my-header" "my-nav my-nav" "my-section my-aside" "my-footer my-footer";
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 200px 80px 740px 380px;
+    }
+
+}
+
+@media (min-width: 1001px) {
+    main {
+        grid-template-areas: "my-header my-header my-header" " my-nav my-nav my-nav" " my-section my-section my-aside" "my-footer my-footer my-footer";
+        grid-template-columns: 15% 70% 15%;
+        grid-template-rows: 200px 80px 500px 180px;
+    }
+}
