@@ -188,6 +188,7 @@ paths:
       - name: "zone_id"
         in: "path"
         description: "Id de Árbol a buscar"
+        required: true
       - name: "user_id"
         in: "path"
         description: "Id de Árbol a buscar"
@@ -237,10 +238,10 @@ paths:
         in: "path"
         description: "Id de Árbol a buscar"
         required: true 
-       - name: "zone_id"
+      - name: "zone_id"
         in: "path"
         description: "Id de Árbol a buscar"
-       - name: "user_id"
+      - name: "user_id"
         in: "path"
         description: "Id de Árbol a buscar"
         required: true  
