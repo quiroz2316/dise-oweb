@@ -27,87 +27,322 @@ paths:
         - Arbol
       summary: Listar todos los arboles (Sin descripción)
       description: Se listaran todos los arboles registrados de forma descendiente por id.
-      operationId: findPetsByStatus
-      parameters:
-        - name: status
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          explode: true
-          schema:
-            type: string
-            default: available
-            enum:
-              - available
-              - pending
-              - sold
+      operationId: listarArbol
       responses:
-        '200':
+        '1':
           description: successful operation
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Order'
-        '400':
+                  $ref: '#/components/schemas/Arbol'
+        '-1':
           description: Invalid status value
       security:
         - petstore_auth:
             - write:pets
             - read:pets
-
+  /api_obtenerarboles_desc:
+    get:
+      tags:
+        - Arbol
+      summary: Listar todos los arboles (Con descripción)
+      description: Se listaran todos los arboles registrados de forma descendiente por id.
+      operationId: listarArboldesc
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol_desc'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+            
+  /api_obtenerarbol_nom/{nom}:
+    get:
+      tags:
+        - Arbol
+      summary: Listar arbol según el nombre ingresado (Con descripción)
+      description: Se listara el árbol registrado si el nombre coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
+      operationId: listarArbolnom
+      parameters:
+      - name: "nom"
+        in: "path"
+        description: "Nombre de Árbol a buscar"
+        required: true
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol_desc'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_obtenerarbol/{id}:
+    get:
+      tags:
+        - Arbol
+      summary: Listar arbol según el nombre ingresado (Sin descripción)
+      description: Se listara el árbol registrado si el nombre proporcionado coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
+      operationId: listarArbolid
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+        
+      responses:
+        '1':
+          description: successful operation
+          content:
+            
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_obtenerarbol_desc/{id}:
+    get:
+      tags:
+        - Arbol
+      summary: Listar arbol según el nombre ingresado (Con descripción)
+      description: Se listara el árbol registrado si el id proporcionado coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
+      operationId: listarArbolidDesc
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol_desc'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets  
+  /api_guardararbol:
+    post:
+      tags:
+        - Arbol
+      summary: Guardar arbol.
+      description: Se registrara un nuevo arbol dependiendo de los valores que le proporcionemos.
+      operationId: guardarArbol
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      - name: "birth_date"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true  
+      - name: "planting_date"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      - name: "description"
+        in: "path"
+        description: "Id de Árbol a buscar"  
+        required: true
+      - name: "latitude"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      - name: "longitude"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true  
+      - name: "specie_id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true 
+       - name: "zone_id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+       - name: "user_id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true  
+      responses:
+        '1':
+          description: successful operation
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_actualizararbol:
+    post:
+      tags:
+        - Arbol
+      summary: Guardar arbol.
+      description: Se registrara un nuevo arbol dependiendo de los valores que le proporcionemos.
+      operationId: guardarArbol
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      - name: "birth_date"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true  
+      - name: "planting_date"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      - name: "description"
+        in: "path"
+        description: "Id de Árbol a buscar"  
+        required: true
+      - name: "latitude"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      - name: "longitude"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true  
+      - name: "specie_id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true 
+       - name: "zone_id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+       - name: "user_id"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true  
+      responses:
+        '1':
+          description: successful operation
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
 components:
   schemas:
-    Order:
+    Arbol:
       type: object
       properties:
+        birth_date:
+          example: '2022-06-01 00:00:00'
+        created_at:
+          example: '2022-06-01 00:00:00'
+        description:
+          example: 'null'
         id:
-          type: integer
-          format: int64
-          example: 10
-        petId:
-          type: integer
-          format: int64
-          example: 198772
-        quantity:
-          type: integer
-          format: int32
-          example: 7
-        shipDate:
-          type: string
-          format: date-time
-        status:
-          type: string
-          description: Order Status
-          example: approved
-          enum:
-            - placed
-            - approved
-            - delivered
-        complete:
-          type: boolean
-      xml:
-        name: order
+          example: 9
+        latitude:
+          example: -6.803033899479622
+        longitude:
+          example: -79.84077392268448
+        name:
+          example: 'Árbol 09'
+        planting_date:
+          example: '2022-07-04 00:00:00'
+        specie_id:
+          example: 9  
+        updated_at:
+          example: '2022-07-05 08:35:37' 
+        user_id:
+          example: 1
+        zone_id:
+          example: 3   
+    Arbol_guardar:
+      type: object
+      properties:
+        name:
+          example: 'Árbol 09'
+        birth_date:
+          example: '2022-06-01 00:00:00'
+        planting_date:
+          example: '2022-07-04 00:00:00'
+        description:
+          example: 'null'
+        latitude:
+          example: -6.803033899479622
+        longitude:
+          example: -79.84077392268448
+        specie_id:
+          example: 9 
+        zone_id:
+          example: 3 
+        user_id:
+          example: 1
+  
+    Arbol_desc:
+      type: object
+      properties:
+        birth_date:
+          example: '2022-06-01 00:00:00'
+        created_at:
+          example: '2022-06-01 00:00:00'
+        description:
+          example: 'null'
+        especie:
+          example: 'Pistacia lentiscus'
+        familia_id:
+          example: 9
+        familia_nombre:
+          example: 'Cupresáceas'
+        id:
+          example: 9
+        latitude:
+          example: -6.803033899479622
+        longitude:
+          example: -79.84077392268448
+        name:
+          example: 'Árbol 09'
+        planting_date:
+          example: '2022-07-04 00:00:00'
+        specie_id:
+          example: 9  
+        updated_at:
+          example: '2022-07-05 08:35:37' 
+        user_id:
+          example: 1
+        usuario:
+          example: 'Pablito Admin'
+        zona:
+          example: 'Zona 3'
+        zone_id:
+          example: 3     
 
-  requestBodies:
-    Pet:
-      description: Pet object that needs to be added to the store
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Order'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/Order'
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Order'
+
   securitySchemes:
     petstore_auth:
       type: oauth2
