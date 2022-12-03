@@ -1,4 +1,4 @@
-openapi: 3.0.3
+swagger: "2.0"
 info:
   title: GRUPO 1 - DOCUMENTACIÓN DE APIS
   description: |-
@@ -18,7 +18,6 @@ servers:
   - url: http://cristianquirozusat.pythonanywhere.com
 tags:
   - name: Arbol
-
   - name: Arbol Foto
 paths:
   /api_obtenerarboles:
@@ -30,19 +29,11 @@ paths:
       operationId: listarArbol
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol'
+          description: 
+          schema:
+            $ref: '#/components/schemas/Arbol'
         '-1':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+          description: El proceso de Listar Arboles no culminó satisfactoriamente
   /api_obtenerarboles_desc:
     get:
       tags:
@@ -52,19 +43,11 @@ paths:
       operationId: listarArboldesc
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol_desc'
+          description:
+          schema:
+            $ref: '#/components/schemas/Arbol_desc'
         '-1':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+          description: El proceso de Listar Arboles con descripción no culminó satisfactoriamente.
             
   /api_obtenerarbol_nom/{nom}:
     get:
@@ -73,26 +56,20 @@ paths:
       summary: API OBTENER ARBOLES NOM
       description: Se listara el árbol registrado si el nombre coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
       operationId: listarArbolnom
+      produces:
+        - application/json
       parameters:
-      - name: "nom"
-        in: "path"
-        description: "Nombre de Árbol a buscar"
-        required: true
+        - name: "nom"
+          in: "path"
+          description: Nombre del árbol.
+          required: true
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol_desc'
+          description:
+          schema:
+                $ref: '#/components/schemas/Arbol_desc'
         '-1':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+          description: El proceso de Obtener Árbol por nombre no culminó satisfactoriamente.
   /api_obtenerarbol/{id}:
     get:
       tags:
@@ -105,23 +82,17 @@ paths:
         in: "path"
         description: "Id de Árbol a buscar"
         required: true
-        
       responses:
         '1':
-          description: successful operation
+          description:
           content:
-            
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Arbol'
         '-1':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+          description: El proceso de Obtener Árbol por id no culminó satisfactoriamente
   /api_obtenerarbol_desc/{id}:
     get:
       tags:
@@ -136,7 +107,7 @@ paths:
         required: true
       responses:
         '1':
-          description: successful operation
+          description:
           content:
             application/json:
               schema:
@@ -144,11 +115,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Arbol_desc'
         '-1':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets  
+          description: El proceso de Obtener Árbol por id con descripción no culminó satisfactoriamente
   /api_guardararbol:
     post:
       tags:
@@ -156,52 +123,26 @@ paths:
       summary: API GUARDAR ARBOL
       description: Realiza un insert en la tabla trees.
       operationId: guardarArbol
+      consumes:
+        - application/json
+      produces:
+        - application/json
       parameters:
-      - name: "name"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "birth_date"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true  
-      - name: "planting_date"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "description"
-        in: "path"
-        description: "Id de Árbol a buscar"  
-        required: true
-      - name: "latitude"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "longitude"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true  
-      - name: "specie_id"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true 
-      - name: "zone_id"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "user_id"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true  
+        - in: body
+          name: body
+          description: El api necesita los siguientes valores.
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      
       responses:
         '1':
           description: successful operation
         '-1':
           description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
   /api_actualizararbol:
     post:
       tags:
@@ -210,51 +151,21 @@ paths:
       description: Realiza un update en la tabla trees, haciendo coincidir el id.
       operationId: actualizarArbol
       parameters:
-      - name: "name"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "birth_date"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true  
-      - name: "planting_date"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "description"
-        in: "path"
-        description: "Id de Árbol a buscar"  
-        required: true
-      - name: "latitude"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true
-      - name: "longitude"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true  
-      - name: "specie_id"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true 
-      - name: "zone_id"
-        in: "path"
-        required: true
-        description: "Id de Árbol a buscar"
-      - name: "user_id"
-        in: "path"
-        description: "Id de Árbol a buscar"
-        required: true  
+        - in: body
+          name: body
+          description: El api necesita los siguientes valores.
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+      
       responses:
         '1':
           description: successful operation
         '-1':
           description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
   /api_eliminararbol:
     post:
       tags:
@@ -272,10 +183,6 @@ paths:
           description: successful operation
         '-1':
           description: Invalid status value
-      security:
-        - apis_auth:
-            - write:pets
-            - read:pets
             
   /api_obtenerarbolfotos:
     get:
@@ -295,10 +202,7 @@ paths:
                   $ref: '#/components/schemas/Arbol'
         '-1':
           description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
   /api_obtenerarbolfotos_desc:
     get:
       tags:
@@ -317,10 +221,7 @@ paths:
                   $ref: '#/components/schemas/Arbol'
         '-1':
           description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
   /api_obtenerarbolfoto/{id}:
     get:
       tags:
@@ -339,10 +240,7 @@ paths:
                   $ref: '#/components/schemas/Arbol'
         '-1':
           description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
   /api_obtenerarbolfoto_desc/{id}:
     get:
       tags:
@@ -361,10 +259,7 @@ paths:
                   $ref: '#/components/schemas/Arbol'
         '-1':
           description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
   /api_guardararbolfoto:
     post:
       tags:
@@ -382,10 +277,7 @@ paths:
           description: successful operation
         '-1':
           description: Invalid status value
-      security:
-        - apis_auth:
-            - write:pets
-            - read:pets
+
   /api_actualizararbolfoto:
     post:
       tags:
@@ -403,10 +295,7 @@ paths:
           description: successful operation
         '-1':
           description: Invalid status value
-      security:
-        - apis_auth:
-            - write:pets
-            - read:pets
+
             
   /api_eliminararbolfoto:
     post:
@@ -425,10 +314,7 @@ paths:
           description: successful operation
         '-1':
           description: Invalid status value
-      security:
-        - apis_auth:
-            - write:pets
-            - read:pets
+
 components:
   schemas:
     Arbol:
@@ -532,3 +418,31 @@ components:
       type: apiKey
       name: api_key
       in: header
+definitions:
+  User:
+    type: object
+    properties:
+      name:
+        example: 'Árbol 09'
+      birth_date:
+        example: '2022-06-01 00:00:00'
+      planting_date:
+        example: '2022-07-04 00:00:00'
+      description:
+        example: 'Arbol importado'
+      latitude:
+        example: -6.803033899479622
+      longitude:
+        example: -79.84077392268448
+      specie_id:
+        example: 9 
+      zone_id:
+        example: 3 
+      user_id:
+        example: 1
+      
+  Arboln:
+    type: object
+    properties:
+      name:
+        example: 'Árbol 09'
