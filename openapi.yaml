@@ -17,13 +17,13 @@ info:
 servers:
   - url: http://cristianquirozusat.pythonanywhere.com
 tags:
-  - name: Arbol
-  - name: Arbol Foto
+  - name: Árbol
+  - name: Árbol Foto
 paths:
   /api_obtenerarboles:
     get:
       tags:
-        - Arbol
+        - Árbol
       summary: API OBTENER ARBOLES
       description: Se listaran todos los arboles registrados de forma descendiente por id.
       operationId: listarArbol
@@ -37,7 +37,7 @@ paths:
   /api_obtenerarboles_desc:
     get:
       tags:
-        - Arbol
+        - Árbol
       summary: API OBTENER ARBOLES DESC
       description: Se listaran todos los arboles registrados de forma descendiente por id.
       operationId: listarArboldesc
@@ -52,7 +52,7 @@ paths:
   /api_obtenerarbol_nom/{nom}:
     get:
       tags:
-        - Arbol
+        - Árbol
       summary: API OBTENER ARBOLES NOM
       description: Se listara el árbol registrado si el nombre coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
       operationId: listarArbolnom
@@ -73,7 +73,7 @@ paths:
   /api_obtenerarbol/{id}:
     get:
       tags:
-        - Arbol
+        - Árbol
       summary: API OBTENER ARBOL POR ID
       description: Se listara el árbol registrado si el nombre proporcionado coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
       operationId: listarArbolid
@@ -94,7 +94,7 @@ paths:
   /api_obtenerarbol_desc/{id}:
     get:
       tags:
-        - Arbol
+        - Árbol
       summary: API OBTENER ARBOL POR ID DESC
       description: Muestra un registro de la tabla tree según su id llamando la descripción de campos referenciados mediante las llaves foráneas.
       operationId: listarArbolidDesc
@@ -115,7 +115,7 @@ paths:
   /api_guardararbol:
     post:
       tags:
-        - Arbol
+        - Árbol
       summary: API GUARDAR ARBOL
       description: Realiza un insert en la tabla trees.
       operationId: guardarArbol
@@ -142,7 +142,7 @@ paths:
   /api_actualizararbol:
     post:
       tags:
-        - Arbol
+        - Árbol
       summary: API MODIFICAR ARBOL
       description: Realiza un update en la tabla trees, haciendo coincidir el id.
       operationId: actualizarArbol
@@ -152,9 +152,7 @@ paths:
           description: Para consumir el API es necesario ingresar los siguientes parámetros.
           required: true
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/Arbola'
+            $ref: '#/components/schemas/Arbola'
       responses:
         '1':
           description: Árbol modificado correctamente.
@@ -166,15 +164,17 @@ paths:
   /api_eliminararbol:
     post:
       tags:
-        - Arbol
+        - Árbol
       summary: API ELIMINAR ARBOL
       description: Realiza un delete en la tabla trees, haciendo coincidir el id.
       operationId: eliminarArbol
       parameters:
-      - name: "name"
-        in: "path"
-        description: "Id de Árbol a buscar"
+      - in: body
+        name: body
+        description: Para consumir el API es necesario ingresar los siguientes parámetros.
         required: true
+        schema:
+          $ref: '#/components/schemas/Arbole'
       responses:
         '1':
           description: Árbol eliminado correctamente.
@@ -186,133 +186,143 @@ paths:
   /api_obtenerarbolfotos:
     get:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API OBTENER ARBOLES FOTOS
       description: Lista la tabla tree photos con sus determinados campos.
       operationId: listarArbolFoto
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol'
+          description:
+          schema:
+            $ref: '#/components/schemas/Arbolfoto'
         '-1':
-          description: Invalid status value
+          description: El proceso de Listar Arboles Foto no culminó satisfactoriamente.
 
   /api_obtenerarbolfotos_desc:
     get:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API OBTENER ARBOLES FOTOS DESC
       description: Lista la tabla tree photos llamando la descripción de campos referenciados mediante las llaves foráneas.
       operationId: listarArbolFotoDesc
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol'
+          description:
+          schema:
+            $ref: '#/components/schemas/Arbolfotod'
         '-1':
-          description: Invalid status value
+          description: El proceso de Listar Arboles Foto con descripción no culminó satisfactoriamente.
 
   /api_obtenerarbolfoto/{id}:
     get:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API OBTENER ARBOL FOTO POR ID
       description: Muestra un registro de la tabla tree photos según su id.
       operationId: listarArbolFotoId
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de Árbol Foto a buscar"
+        required: true
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol'
+          description:
+          schema:
+            $ref: '#/components/schemas/Arbolfoto'
+        '0':
+          description: Árbol Foto no encontrado.
         '-1':
-          description: Invalid status value
+          description: El proceso de Obtener Árbol Foto por id no culminó satisfactoriamente.
 
   /api_obtenerarbolfoto_desc/{id}:
     get:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API OBTENER ARBOL FOTO POR ID DESC
       description: Muestra un registro de la tabla tree photos según su id llamando la descripción de campos referenciados mediante las llaves foráneas.
       operationId: listarArbolFotoIdDesc
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id de Árbol Foto a buscar"
+        required: true
       responses:
         '1':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol'
+          description:
+          schema:
+            $ref: '#/components/schemas/Arbolfotod'
+        '0':
+          description: Árbol Foto no encontrado.
         '-1':
-          description: Invalid status value
+          description: El proceso de Obtener Árbol Foto por id con descripción no culminó satisfactoriamente.
 
   /api_guardararbolfoto:
     post:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API GUARDAR ARBOL FOTO
       description: Realiza una inserción en la tabla tree photos, asignándole una imagen codificada algorítmicamente a un árbol (tree).
       operationId: guardarArbolFoto
       parameters:
-      - name: "name"
-        in: "path"
-        description: "Id de Árbol a buscar"
+      - in: body
+        name: body
+        description: Para consumir el API es necesario ingresar los siguientes parámetros.
         required: true
+        schema:
+          $ref: '#/components/schemas/Arbolfg'
       responses:
         '1':
-          description: successful operation
+          description: Árbol Foto registrado correctamente.
+        '0':
+          description: Árbol no encontrado.
         '-1':
-          description: Invalid status value
+          description: El proceso de Guardar Árbol Foto no culminó satisfactoriamente.
 
   /api_actualizararbolfoto:
     post:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API ACTUALIZAR ARBOL FOTO
       description: Realiza una inserción en la tabla tree photos, asignándole una imagen codificada algorítmicamente a un árbol (tree).
       operationId: actualizarArbolFoto
       parameters:
-      - name: "name"
-        in: "path"
-        description: "Id de Árbol a buscar"
+      - in: body
+        name: body
+        description: Para consumir el API es necesario ingresar los siguientes parámetros.
         required: true
+        schema:
+          $ref: '#/components/schemas/Arbolfa'
       responses:
         '1':
-          description: successful operation
+          description: Árbol Foto actualizado correctamente.
+        '0':
+          description: Árbol/Árbol Foto/Ruta no encontrado(a).
         '-1':
-          description: Invalid status value
+          description: El proceso de Actualizar Árbol Foto no culminó satisfactoriamente.
 
             
   /api_eliminararbolfoto:
     post:
       tags:
-        - Arbol Foto
+        - Árbol Foto
       summary: API ELIMINAR ARBOL FOTO
-      description: Realiza un delete en la tabla tree photos, haciendo coincidir el id.
+      description: Realiza un delete en la tabla tree photos, haciendo coincidir el id. Además elimina la imagen asociada al arbol foto.
       operationId: eliminarArbolFoto
       parameters:
-      - name: "name"
-        in: "path"
-        description: "Id de Árbol a buscar"
+      - in: body
+        name: body
+        description: Para consumir el API es necesario ingresar los siguientes parámetros.
         required: true
+        schema:
+          $ref: '#/components/schemas/Arbolfe'
       responses:
         '1':
-          description: successful operation
+          description: Árbol Foto eliminado correctamente correctamente.
+        '0':
+          description: Árbol Foto no encontrado.
         '-1':
-          description: Invalid status value
+          description: El proceso de Eliminar Árbol Foto no culminó satisfactoriamente.
 
 components:
   schemas:
@@ -343,7 +353,34 @@ components:
           example: 1
         zone_id:
           example: 3
-        
+    Arbolfoto:
+      type: object
+      properties:
+        created_at:
+          example: '2022-12-01 17:19:20'
+        id:
+          example: 70
+        tree_id:
+          example: 3
+        updated_at:
+          example: '2022-07-05 08:35:37' 
+        url:
+          example: 'mysite/public/files/trees/3/TpMGl5A7xNYc-2022-12-01.jpg'
+    Arbolfotod:
+      type: object
+      properties:
+        created_at:
+          example: '2022-12-01 17:19:20'
+        descripcion:
+          example: 'Árbol 03'
+        id:
+          example: 70
+        tree_id:
+          example: 3
+        updated_at:
+          example: '2022-07-05 08:35:37' 
+        url:
+          example: 'mysite/public/files/trees/3/TpMGl5A7xNYc-2022-12-01.jpg'
     Arbol_guardar:
       type: object
       properties:
@@ -365,7 +402,32 @@ components:
           example: 3 
         user_id:
           example: 1
-  
+    Arbole:
+      type: object
+      properties:
+        id:
+          example: 9
+    Arbolfg:
+      type: object
+      properties:
+        imagen:
+          example: Aqui se inserta la imagen codificada en b64
+        tree_id:
+          example: 3
+    Arbolfa:
+      type: object
+      properties:
+        id:
+          example: 68
+        url:
+          example: 'mysite/public/files/trees/3/TpMGl5A7xNYc-2022-12-01.jpg'
+        tree_id:
+          example: 3
+    Arbolfe:
+      type: object
+      properties:
+        id:
+          example: 68
     Arbol_desc:
       type: object
       properties:
@@ -447,25 +509,3 @@ components:
           example: 3 
         user_id:
           example: 1
-
-  securitySchemes:
-    apis_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: http://cristianquirozusat.pythonanywhere.com/auth
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
-definitions:
-  
-      
-  Arboln:
-    type: object
-    properties:
-      name:
-        example: 'Árbol 09'
