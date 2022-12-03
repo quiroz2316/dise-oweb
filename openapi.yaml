@@ -85,12 +85,10 @@ paths:
       responses:
         '1':
           description:
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol'
+          schema:
+              $ref: '#/components/schemas/Arbol'
+        '0':
+          description: Árbol no encontrado.
         '-1':
           description: El proceso de Obtener Árbol por id no culminó satisfactoriamente
   /api_obtenerarbol_desc/{id}:
@@ -106,14 +104,12 @@ paths:
         description: "Id de Árbol a buscar"
         required: true
       responses:
+        '0':
+          description: Árbol no encontrado.
         '1':
           description:
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Arbol_desc'
+          schema:
+            $ref: '#/components/schemas/Arbol_desc'
         '-1':
           description: El proceso de Obtener Árbol por id con descripción no culminó satisfactoriamente
   /api_guardararbol:
@@ -130,18 +126,18 @@ paths:
       parameters:
         - in: body
           name: body
-          description: El api necesita los siguientes valores.
+          description: Para consumir el API es necesario ingresar los siguientes parámetros.
           required: true
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
+              $ref: '#/components/schemas/Arbolg'
       
       responses:
+        '0':
+          description: Usuario/Zona/Especie no encontrado(a).
         '1':
-          description: successful operation
+          description: Árbol guardado correctamente.
         '-1':
-          description: Invalid status value
+          description: El proceso de Guardar Árbol no culminó satisfactoriamente.
 
   /api_actualizararbol:
     post:
@@ -153,18 +149,19 @@ paths:
       parameters:
         - in: body
           name: body
-          description: El api necesita los siguientes valores.
+          description: Para consumir el API es necesario ingresar los siguientes parámetros.
           required: true
           schema:
             type: array
             items:
-              $ref: '#/definitions/User'
-      
+              $ref: '#/components/schemas/Arbola'
       responses:
         '1':
-          description: successful operation
+          description: Árbol modificado correctamente.
+        '0':
+          description: Árbol/Usuario/Zona/Especie no encontrado(a).
         '-1':
-          description: Invalid status value
+          description: El proceso de Actualizar Árbol no culminó satisfactoriamente.
 
   /api_eliminararbol:
     post:
@@ -180,9 +177,11 @@ paths:
         required: true
       responses:
         '1':
-          description: successful operation
+          description: Árbol eliminado correctamente.
+        '0':
+          description: Árbol no encontrado.
         '-1':
-          description: Invalid status value
+          description: El proceso de Eliminar Árbol no culminó satisfactoriamente.
             
   /api_obtenerarbolfotos:
     get:
@@ -327,13 +326,13 @@ components:
         description:
           example: 'null'
         id:
-          example: 9
+          example: 1
         latitude:
           example: -6.803033899479622
         longitude:
           example: -79.84077392268448
         name:
-          example: 'Árbol 09'
+          example: 'Árbol 01'
         planting_date:
           example: '2022-07-04 00:00:00'
         specie_id:
@@ -343,7 +342,8 @@ components:
         user_id:
           example: 1
         zone_id:
-          example: 3   
+          example: 3
+        
     Arbol_guardar:
       type: object
       properties:
@@ -403,7 +403,50 @@ components:
           example: 'Zona 3'
         zone_id:
           example: 3     
-
+    Arbolg:
+      type: object
+      properties:
+        name:
+          example: 'Árbol 09'
+        birth_date:
+          example: '2022-06-01 00:00:00'
+        planting_date:
+          example: '2022-07-04 00:00:00'
+        description:
+          example: 'Arbol importado'
+        latitude:
+          example: -6.803033899479622
+        longitude:
+          example: -79.84077392268448
+        specie_id:
+          example: 9 
+        zone_id:
+          example: 3 
+        user_id:
+          example: 1
+    Arbola:
+      type: object
+      properties:
+        id:
+          example: 9
+        name:
+          example: 'Árbol 09'
+        birth_date:
+          example: '2022-06-01 00:00:00'
+        planting_date:
+          example: '2022-07-04 00:00:00'
+        description:
+          example: 'Arbol importado'
+        latitude:
+          example: -6.803033899479622
+        longitude:
+          example: -79.84077392268448
+        specie_id:
+          example: 9 
+        zone_id:
+          example: 3 
+        user_id:
+          example: 1
 
   securitySchemes:
     apis_auth:
@@ -419,27 +462,7 @@ components:
       name: api_key
       in: header
 definitions:
-  User:
-    type: object
-    properties:
-      name:
-        example: 'Árbol 09'
-      birth_date:
-        example: '2022-06-01 00:00:00'
-      planting_date:
-        example: '2022-07-04 00:00:00'
-      description:
-        example: 'Arbol importado'
-      latitude:
-        example: -6.803033899479622
-      longitude:
-        example: -79.84077392268448
-      specie_id:
-        example: 9 
-      zone_id:
-        example: 3 
-      user_id:
-        example: 1
+  
       
   Arboln:
     type: object
