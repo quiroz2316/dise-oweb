@@ -25,7 +25,7 @@ paths:
     get:
       tags:
         - Arbol
-      summary: Listar todos los arboles (Sin descripción)
+      summary: API OBTENER ARBOLES
       description: Se listaran todos los arboles registrados de forma descendiente por id.
       operationId: listarArbol
       responses:
@@ -47,7 +47,7 @@ paths:
     get:
       tags:
         - Arbol
-      summary: Listar todos los arboles (Con descripción)
+      summary: API OBTENER ARBOLES DESC
       description: Se listaran todos los arboles registrados de forma descendiente por id.
       operationId: listarArboldesc
       responses:
@@ -70,7 +70,7 @@ paths:
     get:
       tags:
         - Arbol
-      summary: Listar arbol según el nombre ingresado (Con descripción)
+      summary: API OBTENER ARBOLES NOM
       description: Se listara el árbol registrado si el nombre coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
       operationId: listarArbolnom
       parameters:
@@ -97,7 +97,7 @@ paths:
     get:
       tags:
         - Arbol
-      summary: Listar arbol según el nombre ingresado (Sin descripción)
+      summary: API OBTENER ARBOL POR ID
       description: Se listara el árbol registrado si el nombre proporcionado coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
       operationId: listarArbolid
       parameters:
@@ -126,8 +126,8 @@ paths:
     get:
       tags:
         - Arbol
-      summary: Listar arbol según el nombre ingresado (Con descripción)
-      description: Se listara el árbol registrado si el id proporcionado coincide con alguno, si se envia el parámetro con espacio se listaran todos los arboles.
+      summary: API OBTENER ARBOL POR ID DESC
+      description: Muestra un registro de la tabla tree según su id llamando la descripción de campos referenciados mediante las llaves foráneas.
       operationId: listarArbolidDesc
       parameters:
       - name: "id"
@@ -153,8 +153,8 @@ paths:
     post:
       tags:
         - Arbol
-      summary: Guardar arbol.
-      description: Se registrara un nuevo arbol dependiendo de los valores que le proporcionemos.
+      summary: API GUARDAR ARBOL
+      description: Realiza un insert en la tabla trees.
       operationId: guardarArbol
       parameters:
       - name: "name"
@@ -206,9 +206,9 @@ paths:
     post:
       tags:
         - Arbol
-      summary: Guardar arbol.
-      description: Se registrara un nuevo arbol dependiendo de los valores que le proporcionemos.
-      operationId: guardarArbol
+      summary: API MODIFICAR ARBOL
+      description: Realiza un update en la tabla trees, haciendo coincidir el id.
+      operationId: actualizarArbol
       parameters:
       - name: "name"
         in: "path"
@@ -240,6 +240,7 @@ paths:
         required: true 
       - name: "zone_id"
         in: "path"
+        required: true
         description: "Id de Árbol a buscar"
       - name: "user_id"
         in: "path"
@@ -252,6 +253,180 @@ paths:
           description: Invalid status value
       security:
         - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_eliminararbol:
+    post:
+      tags:
+        - Arbol
+      summary: API ELIMINAR ARBOL
+      description: Realiza un delete en la tabla trees, haciendo coincidir el id.
+      operationId: eliminarArbol
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      responses:
+        '1':
+          description: successful operation
+        '-1':
+          description: Invalid status value
+      security:
+        - apis_auth:
+            - write:pets
+            - read:pets
+            
+  /api_obtenerarbolfotos:
+    get:
+      tags:
+        - Arbol Foto
+      summary: API OBTENER ARBOLES FOTOS
+      description: Lista la tabla tree photos con sus determinados campos.
+      operationId: listarArbolFoto
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_obtenerarbolfotos_desc:
+    get:
+      tags:
+        - Arbol Foto
+      summary: API OBTENER ARBOLES FOTOS DESC
+      description: Lista la tabla tree photos llamando la descripción de campos referenciados mediante las llaves foráneas.
+      operationId: listarArbolFotoDesc
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_obtenerarbolfoto/{id}:
+    get:
+      tags:
+        - Arbol Foto
+      summary: API OBTENER ARBOL FOTO POR ID
+      description: Muestra un registro de la tabla tree photos según su id.
+      operationId: listarArbolFotoId
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_obtenerarbolfoto_desc/{id}:
+    get:
+      tags:
+        - Arbol Foto
+      summary: API OBTENER ARBOL FOTO POR ID DESC
+      description: Muestra un registro de la tabla tree photos según su id llamando la descripción de campos referenciados mediante las llaves foráneas.
+      operationId: listarArbolFotoIdDesc
+      responses:
+        '1':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Arbol'
+        '-1':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:pets
+            - read:pets
+  /api_guardararbolfoto:
+    post:
+      tags:
+        - Arbol Foto
+      summary: API GUARDAR ARBOL FOTO
+      description: Realiza una inserción en la tabla tree photos, asignándole una imagen codificada algorítmicamente a un árbol (tree).
+      operationId: guardarArbolFoto
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      responses:
+        '1':
+          description: successful operation
+        '-1':
+          description: Invalid status value
+      security:
+        - apis_auth:
+            - write:pets
+            - read:pets
+  /api_actualizararbolfoto:
+    post:
+      tags:
+        - Arbol Foto
+      summary: API ACTUALIZAR ARBOL FOTO
+      description: Realiza una inserción en la tabla tree photos, asignándole una imagen codificada algorítmicamente a un árbol (tree).
+      operationId: actualizarArbolFoto
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      responses:
+        '1':
+          description: successful operation
+        '-1':
+          description: Invalid status value
+      security:
+        - apis_auth:
+            - write:pets
+            - read:pets
+            
+  /api_eliminararbolfoto:
+    post:
+      tags:
+        - Arbol Foto
+      summary: API ELIMINAR ARBOL FOTO
+      description: Realiza un delete en la tabla tree photos, haciendo coincidir el id.
+      operationId: eliminarArbolFoto
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Id de Árbol a buscar"
+        required: true
+      responses:
+        '1':
+          description: successful operation
+        '-1':
+          description: Invalid status value
+      security:
+        - apis_auth:
             - write:pets
             - read:pets
 components:
@@ -345,7 +520,7 @@ components:
 
 
   securitySchemes:
-    petstore_auth:
+    apis_auth:
       type: oauth2
       flows:
         implicit:
