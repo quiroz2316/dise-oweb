@@ -14,7 +14,7 @@ info:
 
   version: 1.0.12
 
-host: cristianquirozusat.pythonanywhere.com
+host: http://cristianquirozusat.pythonanywhere.com
 
 tags:
   - name: Árbol
