@@ -14,8 +14,8 @@ info:
 
   version: 1.0.12
 
-servers:
-  - url: http://cristianquirozusat.pythonanywhere.com
+host: cristianquirozusat.pythonanywhere.com
+
 tags:
   - name: Árbol
   - name: Árbol Foto
