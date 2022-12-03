@@ -33,7 +33,7 @@ paths:
           schema:
             $ref: '#/components/schemas/Arbol'
         '-1':
-          description: El proceso de Listar Arboles no culminó satisfactoriamente
+          description: El proceso de Listar Arboles no culminó satisfactoriamente.
   /api_obtenerarboles_desc:
     get:
       tags:
@@ -90,7 +90,7 @@ paths:
         '0':
           description: Árbol no encontrado.
         '-1':
-          description: El proceso de Obtener Árbol por id no culminó satisfactoriamente
+          description: El proceso de Obtener Árbol por id no culminó satisfactoriamente.
   /api_obtenerarbol_desc/{id}:
     get:
       tags:
@@ -111,7 +111,7 @@ paths:
           schema:
             $ref: '#/components/schemas/Arbol_desc'
         '-1':
-          description: El proceso de Obtener Árbol por id con descripción no culminó satisfactoriamente
+          description: El proceso de Obtener Árbol por id con descripción no culminó satisfactoriamente.
   /api_guardararbol:
     post:
       tags:
